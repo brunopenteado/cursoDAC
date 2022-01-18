@@ -1,0 +1,184 @@
+@prefix : <https://github.com/brunopenteado/cursoDAC/ontology.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://github.com/brunopenteado/cursoDAC/ontology.owl> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://pne.gov.br/ontology#docente
+:docente rdf:type owl:ObjectProperty ;
+         owl:inverseOf :trabalhaEm ;
+         rdfs:domain :Escola ;
+         rdfs:range :Docente .
+
+
+###  http://pne.gov.br/ontology#gestor
+:gestor rdf:type owl:ObjectProperty ;
+        rdfs:domain :Escola ;
+        rdfs:range :Gestor .
+
+
+###  http://pne.gov.br/ontology#leciona
+:leciona rdf:type owl:ObjectProperty ;
+         rdfs:domain :Docente ;
+         rdfs:range :Turma .
+
+
+###  http://pne.gov.br/ontology#localizacao
+:localizacao rdf:type owl:ObjectProperty ;
+             rdfs:domain :Organizacao ;
+             rdfs:range :Localizacao .
+
+
+###  http://pne.gov.br/ontology#matricula
+:matricula rdf:type owl:ObjectProperty ;
+           owl:inverseOf :matriculadoEm ;
+           rdfs:domain :Turma ;
+           rdfs:range :Matricula .
+
+
+###  http://pne.gov.br/ontology#matriculadoEm
+:matriculadoEm rdf:type owl:ObjectProperty ;
+               rdfs:domain :Matricula ;
+               rdfs:range :Turma .
+
+
+###  http://pne.gov.br/ontology#municipio
+:municipio rdf:type owl:ObjectProperty ;
+           rdfs:domain :Organizacao ;
+           rdfs:range :Municipio .
+
+
+###  http://pne.gov.br/ontology#nascidoEm
+:nascidoEm rdf:type owl:ObjectProperty ;
+           rdfs:domain :Pessoa ;
+           rdfs:range :Municipio .
+
+
+###  http://pne.gov.br/ontology#parteDaEscola
+:parteDaEscola rdf:type owl:ObjectProperty ;
+               owl:inverseOf :temTurma ;
+               rdfs:domain :Turma ;
+               rdfs:range :Escola .
+
+
+###  http://pne.gov.br/ontology#reside
+:reside rdf:type owl:ObjectProperty ;
+        rdfs:domain :Pessoa ;
+        rdfs:range :Municipio .
+
+
+###  http://pne.gov.br/ontology#temTurma
+:temTurma rdf:type owl:ObjectProperty ;
+          rdfs:domain :Escola ;
+          rdfs:range :Turma .
+
+
+###  http://pne.gov.br/ontology#trabalhaEm
+:trabalhaEm rdf:type owl:ObjectProperty ;
+            rdfs:domain :Docente ;
+            rdfs:range :Escola .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://pne.gov.br/ontology#codigo
+:codigo rdf:type owl:DatatypeProperty ,
+                 owl:FunctionalProperty ;
+        rdfs:range xsd:integer .
+
+
+###  http://pne.gov.br/ontology#nome
+:nome rdf:type owl:DatatypeProperty ;
+      rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://pne.gov.br/ontology#Docente
+:Docente rdf:type owl:Class ;
+         rdfs:subClassOf :Pessoa .
+
+
+###  http://pne.gov.br/ontology#Escola
+:Escola rdf:type owl:Class ;
+        rdfs:subClassOf :Organizacao .
+
+
+###  http://pne.gov.br/ontology#Gestor
+:Gestor rdf:type owl:Class ;
+        rdfs:subClassOf :Pessoa .
+
+
+###  http://pne.gov.br/ontology#Localizacao
+:Localizacao rdf:type owl:Class ;
+             owl:equivalentClass [ rdf:type owl:Restriction ;
+                                   owl:onProperty :localizacao ;
+                                   owl:allValuesFrom [ rdf:type owl:Class ;
+                                                       owl:oneOf ( :rural
+                                                                   :urbana
+                                                                 )
+                                                     ]
+                                 ] .
+
+
+###  http://pne.gov.br/ontology#Matricula
+:Matricula rdf:type owl:Class .
+
+
+###  http://pne.gov.br/ontology#Municipio
+:Municipio rdf:type owl:Class .
+
+
+###  http://pne.gov.br/ontology#Organizacao
+:Organizacao rdf:type owl:Class .
+
+
+###  http://pne.gov.br/ontology#Pessoa
+:Pessoa rdf:type owl:Class .
+
+
+###  http://pne.gov.br/ontology#Turma
+:Turma rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://pne.gov.br/ontology#rural
+:rural rdf:type owl:NamedIndividual ,
+                :Localizacao .
+
+
+###  http://pne.gov.br/ontology#urbana
+:urbana rdf:type owl:NamedIndividual ,
+                 :Localizacao .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Docente
+                :Escola
+                :Gestor
+                :Matricula
+                :Municipio
+                :Turma
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
