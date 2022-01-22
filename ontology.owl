@@ -1,102 +1,64 @@
-@prefix : <https://github.com/brunopenteado/cursoDAC/ontology.owl#> .
+@prefix : <https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#> .
 
-<https://github.com/brunopenteado/cursoDAC/ontology.owl> rdf:type owl:Ontology .
+<https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#> rdf:type owl:Ontology ;
+                                                                               owl:imports <https://schema.org/> .
 
 #################################################################
 #    Object Properties
 #################################################################
 
-###  http://pne.gov.br/ontology#docente
-:docente rdf:type owl:ObjectProperty ;
-         owl:inverseOf :trabalhaEm ;
-         rdfs:domain :Escola ;
-         rdfs:range :Docente .
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#escola
+:escola rdf:type owl:ObjectProperty ;
+        rdfs:domain :Turma ;
+        rdfs:range :Escola .
 
 
-###  http://pne.gov.br/ontology#gestor
-:gestor rdf:type owl:ObjectProperty ;
-        rdfs:domain :Escola ;
-        rdfs:range :Gestor .
-
-
-###  http://pne.gov.br/ontology#leciona
-:leciona rdf:type owl:ObjectProperty ;
-         rdfs:domain :Docente ;
-         rdfs:range :Turma .
-
-
-###  http://pne.gov.br/ontology#localizacao
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#localizacao
 :localizacao rdf:type owl:ObjectProperty ;
-             rdfs:domain :Organizacao ;
+             rdfs:domain :Escola ;
              rdfs:range :Localizacao .
 
 
-###  http://pne.gov.br/ontology#matricula
-:matricula rdf:type owl:ObjectProperty ;
-           owl:inverseOf :matriculadoEm ;
-           rdfs:domain :Turma ;
-           rdfs:range :Matricula .
-
-
-###  http://pne.gov.br/ontology#matriculadoEm
-:matriculadoEm rdf:type owl:ObjectProperty ;
-               rdfs:domain :Matricula ;
-               rdfs:range :Turma .
-
-
-###  http://pne.gov.br/ontology#municipio
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#municipio
 :municipio rdf:type owl:ObjectProperty ;
            rdfs:domain :Organizacao ;
            rdfs:range :Municipio .
 
 
-###  http://pne.gov.br/ontology#nascidoEm
-:nascidoEm rdf:type owl:ObjectProperty ;
-           rdfs:domain :Pessoa ;
-           rdfs:range :Municipio .
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#turma
+:turma rdf:type owl:ObjectProperty ;
+       rdfs:domain :Docente ;
+       rdfs:range :Turma .
 
 
-###  http://pne.gov.br/ontology#parteDaEscola
-:parteDaEscola rdf:type owl:ObjectProperty ;
-               owl:inverseOf :temTurma ;
-               rdfs:domain :Turma ;
-               rdfs:range :Escola .
-
-
-###  http://pne.gov.br/ontology#reside
-:reside rdf:type owl:ObjectProperty ;
-        rdfs:domain :Pessoa ;
-        rdfs:range :Municipio .
-
-
-###  http://pne.gov.br/ontology#temTurma
-:temTurma rdf:type owl:ObjectProperty ;
-          rdfs:domain :Escola ;
-          rdfs:range :Turma .
-
-
-###  http://pne.gov.br/ontology#trabalhaEm
-:trabalhaEm rdf:type owl:ObjectProperty ;
-            rdfs:domain :Docente ;
-            rdfs:range :Escola .
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#uf
+:uf rdf:type owl:ObjectProperty ;
+    rdfs:domain :Municipio ;
+    rdfs:range :UF .
 
 
 #################################################################
 #    Data properties
 #################################################################
 
-###  http://pne.gov.br/ontology#codigo
-:codigo rdf:type owl:DatatypeProperty ,
-                 owl:FunctionalProperty ;
-        rdfs:range xsd:integer .
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#codigo
+:codigo rdf:type owl:DatatypeProperty ;
+        rdfs:range xsd:int .
 
 
-###  http://pne.gov.br/ontology#nome
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#necessidadeEspecial
+:necessidadeEspecial rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :Pessoa ;
+                     rdfs:range xsd:boolean .
+
+
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#nome
 :nome rdf:type owl:DatatypeProperty ;
       rdfs:range xsd:string .
 
@@ -105,80 +67,79 @@
 #    Classes
 #################################################################
 
-###  http://pne.gov.br/ontology#Docente
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#Docente
 :Docente rdf:type owl:Class ;
          rdfs:subClassOf :Pessoa .
 
 
-###  http://pne.gov.br/ontology#Escola
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#Escola
 :Escola rdf:type owl:Class ;
+        owl:equivalentClass <https://schema.org/School> ;
         rdfs:subClassOf :Organizacao .
 
 
-###  http://pne.gov.br/ontology#Gestor
-:Gestor rdf:type owl:Class ;
-        rdfs:subClassOf :Pessoa .
-
-
-###  http://pne.gov.br/ontology#Localizacao
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#Localizacao
 :Localizacao rdf:type owl:Class ;
-             owl:equivalentClass [ rdf:type owl:Restriction ;
-                                   owl:onProperty :localizacao ;
-                                   owl:allValuesFrom [ rdf:type owl:Class ;
-                                                       owl:oneOf ( :rural
-                                                                   :urbana
-                                                                 )
-                                                     ]
+             owl:equivalentClass [ rdf:type owl:Class ;
+                                   owl:oneOf ( :rural
+                                               :urbana
+                                             )
                                  ] .
 
 
-###  http://pne.gov.br/ontology#Matricula
-:Matricula rdf:type owl:Class .
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#Lugar
+:Lugar rdf:type owl:Class ;
+       owl:equivalentClass <https://schema.org/Place> .
 
 
-###  http://pne.gov.br/ontology#Municipio
-:Municipio rdf:type owl:Class .
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#Municipio
+:Municipio rdf:type owl:Class ;
+           owl:equivalentClass <https://schema.org/City> ;
+           rdfs:subClassOf :Lugar .
 
 
-###  http://pne.gov.br/ontology#Organizacao
-:Organizacao rdf:type owl:Class .
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#Organizacao
+:Organizacao rdf:type owl:Class ;
+             owl:equivalentClass <https://schema.org/Organization> .
 
 
-###  http://pne.gov.br/ontology#Pessoa
-:Pessoa rdf:type owl:Class .
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#Pessoa
+:Pessoa rdf:type owl:Class ;
+        owl:equivalentClass <https://schema.org/Person> .
 
 
-###  http://pne.gov.br/ontology#Turma
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#Turma
 :Turma rdf:type owl:Class .
 
+
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#UF
+:UF rdf:type owl:Class ;
+    owl:equivalentClass <https://schema.org/State> ;
+    rdfs:subClassOf :Lugar .
+
+
+###  https://schema.org/City
+
+###  https://schema.org/Organization
+
+###  https://schema.org/Person
+
+###  https://schema.org/Place
+
+###  https://schema.org/School
+
+###  https://schema.org/State
 
 #################################################################
 #    Individuals
 #################################################################
 
-###  http://pne.gov.br/ontology#rural
-:rural rdf:type owl:NamedIndividual ,
-                :Localizacao .
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#rural
+:rural rdf:type owl:NamedIndividual .
 
 
-###  http://pne.gov.br/ontology#urbana
-:urbana rdf:type owl:NamedIndividual ,
-                 :Localizacao .
-
-
-#################################################################
-#    General axioms
-#################################################################
-
-[ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :Docente
-                :Escola
-                :Gestor
-                :Matricula
-                :Municipio
-                :Turma
-              )
-] .
+###  https://raw.githubusercontent.com/brunopenteado/cursoDAC/main/ontology.owl#urbana
+:urbana rdf:type owl:NamedIndividual .
 
 
 ###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
